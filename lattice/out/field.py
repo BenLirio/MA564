@@ -59,15 +59,3 @@ def uniform(size, q):
     A.__init__(q)
     return A
 
-
-if __name__ == '__main__':
-    n = 2
-    p = 7
-    a = uniform((n,1), p)
-    s = uniform((n,1), p)
-    e = np.random.randint(0,2,size=(1,1)).view(FieldArray)
-    e.__init__(p)
-    print("a:", a.T)
-    print("s:", s.T)
-    print("e:", e)
-    print("b:", a.T @ s + e)
