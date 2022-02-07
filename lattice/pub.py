@@ -3,7 +3,7 @@ from random import randint
 import numpy as np
 import field
 SCALE = 1
-Q = 97
+Q = 593
 B = 1
 get_m = lambda n: SCALE*( n*ceil(log(Q, 2)) ) 
 
@@ -30,6 +30,7 @@ def Dec(sk, c):
 
 if __name__ == '__main__':
     n = 32
+    print(get_m(n)*B, Q//4)
     n_tries = 1000
     correct = 0
     for _ in range(0, n_tries):

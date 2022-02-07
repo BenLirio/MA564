@@ -1,5 +1,5 @@
 import field
-
+import numpy as np
 
 is_square = lambda A: not (len(A.shape) != 2 or A.shape[0] != A.shape[1])
 
@@ -20,49 +20,59 @@ def inv(A):
             Ap[j] = Ap[j] - Ap[i]*scale
     return Ap
 
-def row_space(A):
+def perp(A):
+    pivots, A = rref(A.T)
+    pivot_cols = set([ c for r,c in pivots ])
+    null_cols = set(range(0,A.shape[1])) - pivot_cols
+
+    P = field.array(np.zeros((len(null_cols), A.shape[1])), A.q)
+    i = 0
+    for c in null_cols:
+        P[i,c] = 1
+        for rp, cp in pivots:
+            if A[rp,c] == 0: continue
+            P[i,cp] = -A[rp,c]
+        i += 1
+    return P
+
+def rref(A):
     A = A.copy()
-
-    # Base Case
-    if A.shape[0] == 0 or A.shape[1] == 0:
-        return 0
-
-    # Inductive Case
-    nrows = A.shape[0]
-
-    # Swap rows s.t. A[0,0] != 0
-    for i in range(0, nrows):
-        if A[i,0] != 0:
-            A[0], A[i] = A[i], A[0]
+    cr = 0
+    cc = 0
+    pivots = []
+    swaps = []
+    while True:
+        if cr >= A.shape[0] or cc >= A.shape[1]:
             break
+        for i in range(cr, A.shape[0]):
+            if A[i,cc] != 0:
+                A[cr,:], A[i,:] = A[i,:], A[cr,:]
+                break
+        if A[cr,cc] == 0:
+            cc += 1
+            continue
+        pivots.append((cr,cc))
+        A[cr] = A[cr]/A[cr,cc]
+        for i in range(0, A.shape[0]):
+            if cr == i: continue
+            A[i] = A[i] - A[cr]*A[i,cc]
+        cr += 1
+        cc += 1
+    return pivots, A
 
-    # Col is degenerate
-    if A[0,0] == 0:
-        return row_space(A[:,1:])
-
-    # Normalize pivot row
-    A[0] = A[0]/A[0,0]
-
-    # Eliminate values in Col
-    for i in range(1, nrows):
-        A[i] = A[i] - (A[0]*A[i,0])
-
-    # Recurse
-    return 1 + row_space(A[1:,1:])
-
-col_space = lambda A: row_space(A)
-null_space = lambda A: A.space[0] - col_space(A)
-left_null_space = lambda A: A.shape[1] - row_space(A)
 
 if __name__ == '__main__':
-    n = 2
-    m = 4
-    q = 13
-    A = field.uniform((n,m), q)
-    #A = field.array([[1,2,3],[2,4,6],[4,8,12],[1,2,3],[1,2,3]], q)
-    A = field.array([
-        [1, 2, 3],
-        [2, 8, 5],
-        [3,2,3],
-        ], q)
-    print(A)
+    n = 6
+    m = 3
+    q = 7
+    while True:
+        A = field.uniform((n, m), q)
+        r = len(rref(A)[0])
+        if r == min(n, m): continue
+        print(A)
+        print(f"A: ({n}, {m})")
+        print(f"C(A): ({n}, {r})")
+        print(f"C(At): ({m}, {r})")
+        print(f"N(A): ({m}, {m-r})")
+        print(f"N(At): ({n}, {n-r})")
+        break
