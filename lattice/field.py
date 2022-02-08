@@ -23,10 +23,23 @@ class FieldArray(np.ndarray):
     def __mul__(self, other):
         self.check_modulo(other)
         return super().__mul__(other) % self.q
+    def __imul__(self, other):
+        self.check_modulo(other)
+        return super().__imul__(other) % self.q
+    def __neg__(self):
+        return super().__neg__() % self.q
+
+    def __setitem__(self, key, value):
+        super().__setitem__(key,value % self.q)
+
 
     def __add__(self, other):
         self.check_modulo(other)
         return super().__add__(other) % self.q
+    def __iadd__(self, other):
+        self.check_modulo(other)
+        return super().__iadd__(other) % self.q
+
     def __truediv__(self, other):
         self.check_modulo(other)
         if not hasattr(other, 'q'):
@@ -40,6 +53,10 @@ class FieldArray(np.ndarray):
     def __sub__(self, other):
         self.check_modulo(other)
         return super().__sub__(other) % self.q
+    def __isub__(self, other):
+        self.check_modulo(other)
+        return super().__isub__(other) % self.q
+
     def __invert__(self):
         f = np.vectorize(lambda x: pow(int(x), -1, self.q))
         return f(self)

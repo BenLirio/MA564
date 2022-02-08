@@ -75,9 +75,7 @@ if __name__ == '__main__':
     m = 5
     q = 97
     A = field.array([[1,1,1,1],[1,1,1,1],[2,3,4,5]], q)
-    while True:
-        A = field.uniform((n, m), q)
-        if np.sum(perp(A)@A) != 0:
-            print(A)
-            print(perp(A))
-            print(perp(A)@A)
+    A = field.uniform((n, m), q)
+    print(A)
+    print(perp(A))
+    print(perp(A)@A)

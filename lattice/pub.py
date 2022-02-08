@@ -1,14 +1,12 @@
-from math import ceil, log
 from random import randint
 import numpy as np
 import field
-SCALE = 1
+import util
 Q = 593
 B = 1
-get_m = lambda n: SCALE*( n*ceil(log(Q, 2)) ) 
 
 def Gen(n):
-    m = get_m(n)
+    m = util.get_m(n, Q)
     A = field.uniform((m,n), Q)
     sk = field.uniform((n,1), Q)
     e = field.array(np.random.randint(-B, B+1, size=(m,1)),Q)
@@ -30,7 +28,7 @@ def Dec(sk, c):
 
 if __name__ == '__main__':
     n = 32
-    print(get_m(n)*B, Q//4)
+    print(util.get_m(n,Q)*B, Q//4)
     n_tries = 1000
     correct = 0
     for _ in range(0, n_tries):
