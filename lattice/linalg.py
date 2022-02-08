@@ -20,38 +20,25 @@ def inv(A):
             Ap[j] = Ap[j] - Ap[i]*scale
     return Ap
 
-def perp(A):
-    pivots, A = rref(A.T)
-    pivot_cols = set([ c for r,c in pivots ])
-    null_cols = set(range(0,A.shape[1])) - pivot_cols
-
-    P = field.array(np.zeros((len(null_cols), A.shape[1])), A.q)
-    i = 0
-    for c in null_cols:
-        P[i,c] = 1
-        for rp, cp in pivots:
-            if A[rp,c] == 0: continue
-            P[i,cp] = -A[rp,c]
-        i += 1
-    return P
-
 def rref(A):
     A = A.copy()
     cr = 0
     cc = 0
-    pivots = []
-    swaps = []
+    pivots = set()
+    swaps = set()
     while True:
         if cr >= A.shape[0] or cc >= A.shape[1]:
             break
         for i in range(cr, A.shape[0]):
             if A[i,cc] != 0:
-                A[cr,:], A[i,:] = A[i,:], A[cr,:]
+                t1 = A[cr].copy()
+                A[cr] = A[i]
+                A[i] = t1
                 break
         if A[cr,cc] == 0:
             cc += 1
             continue
-        pivots.append((cr,cc))
+        pivots.add((cr,cc))
         A[cr] = A[cr]/A[cr,cc]
         for i in range(0, A.shape[0]):
             if cr == i: continue
@@ -60,19 +47,37 @@ def rref(A):
         cc += 1
     return pivots, A
 
+def null_space(A):
+    pivots, A = rref(A)
+    rank = len(pivots)
+    n,m = A.shape[0],A.shape[1]
+    dim = (m, m-rank)
+    A_null = field.array(np.zeros(dim), A.q)
+    pivot_rows = set([a for a,_ in pivots])
+    pivot_cols = set([b for _,b in pivots])
+    col_of_row = {a:b for a,b in pivots}
+
+    A_null_col_idx = 0
+    for A_col_idx in range(0,m):
+        if A_col_idx in pivot_cols: continue
+        for A_row_idx in range(0,n):
+            if A_row_idx in pivot_rows:
+                A_null[col_of_row[A_row_idx], A_null_col_idx] = -A[A_row_idx,A_col_idx]
+        A_null[A_col_idx,A_null_col_idx] = 1
+        A_null_col_idx += 1
+    return A_null
+
+def perp(A): return null_space(A.T).T
+
 
 if __name__ == '__main__':
-    n = 6
-    m = 3
-    q = 7
+    n = 10
+    m = 5
+    q = 97
+    A = field.array([[1,1,1,1],[1,1,1,1],[2,3,4,5]], q)
     while True:
         A = field.uniform((n, m), q)
-        r = len(rref(A)[0])
-        if r == min(n, m): continue
-        print(A)
-        print(f"A: ({n}, {m})")
-        print(f"C(A): ({n}, {r})")
-        print(f"C(At): ({m}, {r})")
-        print(f"N(A): ({m}, {m-r})")
-        print(f"N(At): ({n}, {n-r})")
-        break
+        if np.sum(perp(A)@A) != 0:
+            print(A)
+            print(perp(A))
+            print(perp(A)@A)
