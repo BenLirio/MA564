@@ -1,0 +1,69 @@
+==================== Round 0 ====================
+n=5, m=3, q=97, B=1
+
+Step 1: Generate a LWE instance
+Secret: [87 42 15]
+
+Step 2: Transform into ISIS and solve using ISIS solver
+Found solution after 220 trials.
+
+Step 3: Extract LWE solution from ISIS solution
+ISIS solution (LWE error): [ 0  0 96  1  1]
+LWE solution: [87 42 15]
+Time: 0.01 seconds
+
+==================== Round 1 ====================
+n=7, m=4, q=97, B=1
+
+Step 1: Generate a LWE instance
+Secret: [49 75 61 83]
+
+Step 2: Transform into ISIS and solve using ISIS solver
+Found solution after 432 trials.
+
+Step 3: Extract LWE solution from ISIS solution
+ISIS solution (LWE error): [96 96 96  0  1  0 96]
+LWE solution: [49 75 61 83]
+Time: 0.02 seconds
+
+==================== Round 2 ====================
+n=9, m=5, q=97, B=1
+
+Step 1: Generate a LWE instance
+Secret: [94 32 60 78 87]
+
+Step 2: Transform into ISIS and solve using ISIS solver
+Found solution after 10016 trials.
+
+Step 3: Extract LWE solution from ISIS solution
+ISIS solution (LWE error): [ 1  1  1  0 96  1  0  0  0]
+LWE solution: [94 32 60 78 87]
+Time: 0.38 seconds
+
+==================== Round 3 ====================
+n=11, m=6, q=97, B=1
+
+Step 1: Generate a LWE instance
+Secret: [40  8 75 41  8 34]
+
+Step 2: Transform into ISIS and solve using ISIS solver
+Found solution after 100629 trials.
+
+Step 3: Extract LWE solution from ISIS solution
+ISIS solution (LWE error): [96 96 96  0 96 96 96  0 96  1  0]
+LWE solution: [40  8 75 41  8 34]
+Time: 3.86 seconds
+
+==================== Round 4 ====================
+n=13, m=7, q=97, B=1
+
+Step 1: Generate a LWE instance
+Secret: [68 83 15 83 39  8 64]
+
+Step 2: Transform into ISIS and solve using ISIS solver
+Found solution after 865367 trials.
+
+Step 3: Extract LWE solution from ISIS solution
+ISIS solution (LWE error): [ 1  1  0  0 96 96  1  1  1  0  1  0  0]
+LWE solution: [68 83 15 83 39  8 64]
+Time: 34.30 seconds
