@@ -1,5 +1,5 @@
 
-drawGrid = () => {
+grid = env => {
   stroke('black')
   // Main grid lines
   strokeWeight(2)
