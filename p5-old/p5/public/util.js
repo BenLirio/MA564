@@ -14,5 +14,7 @@ range = (n) => [...Array(n).keys()]
 _point = (x,y) => point(locx(x), locy(y))
 _line = (x1,y1,x2,y2) => line(locx(x1), locy(y1),locx(x2), locy(y2))
 _triangle = (x1,y1,x2,y2,x3,y3) => triangle(locx(x1), locy(y1), locx(x2), locy(y2), locx(x3), locy(y3))
+_quad = (x1,y1,x2,y2,x3,y3,x4,y4) => quad(locx(x1), locy(y1), locx(x2), locy(y2), locx(x3), locy(y3),locx(x4),locy(y4))
+_text = (s,x1,y1) => text(s,locx(x1),locy(y1))
 
 let mousePos = () => ({x:locx_inv(mouseX),y:locy_inv(mouseY)})

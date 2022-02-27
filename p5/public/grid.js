@@ -1,10 +1,24 @@
 
-grid = env => {
+initGrid = () => {
+  return () => {
+    createCanvas(800,800)
+  }
+}
+
+
+gridBackground =
+  bind(lookup('background'))
+  (bg => res(background(bg)))
+
+Eline = (x1,y1,x2,y2) => _ => {
+  res(Line(x1,y1,x2,y2))
+}
+
+  
+
+/*
+gridMain = env => {
   stroke('black')
-  // Main grid lines
-  strokeWeight(2)
-  _line(-1,0,1,0)
-  _line(0,1,0,-1)
 
   // Small grid lines
   strokeWeight(.25)
@@ -16,4 +30,14 @@ grid = env => {
   range(n)
     .map(x => (2*x-n)/n)
     .forEach(x => _line(x,1,x,-1))
+}
+*/
+
+//allGrid = fork(initGrid)
+
+//grid = pair(gridBackground, Eline(1,0,-1,0))
+
+grid = _env => {
+  Line(1,0,-1,0)
+  return () => {}
 }

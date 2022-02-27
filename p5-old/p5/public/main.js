@@ -22,6 +22,7 @@ draw = () => {
   drawLattice()
   drawGrid()
   drawBasis()
+  drawRect()
 }
 
 mousePressed = () => {
