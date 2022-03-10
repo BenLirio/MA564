@@ -1,0 +1,33 @@
+N is dim
+Q is modulo
+B is basis [ N x N ]
+
+P(B) is fundemental region
+
+x <- Guass in [ N ]
+v := x mod P(B)
+a := B-inv v
+
+M is large enough
+A := B_inv V in [ N x M ]
+
+x := SIS_oracle on A
+x in [ M ]
+
+  B_inv       V       x   is in Z
+[ N x N ] [ N x M ] [ M ]
+
+ Multiply both sides by B
+
+    V       x   in B
+[ N x M ] [ M ]
+
+X <=> V mod P(B)
+
+Therefore V in B
+
+    X       x
+[ N x M ] [ M ]
+
+
+How short is |Xx| ?

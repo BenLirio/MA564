@@ -1,0 +1,44 @@
+Reduce approx lattice to random linear equations with coeff in [ N ] of Zq
+
+Group is [ N ] of Zq
+
+draw pair of  group element and offset vector
+Solution to group element 
+
+average case SIS oracle
+
+coefficients must be distributed almost uniformly at random in the group.
+
+
+Previous approach
+L in [ R x R ]
+C is hypercude in [ R x R ]
+partition C into [ Q << N ] parts
+For each l in L find closest c in C
+Let |c| be the number of l such that c is closest
+|c| in C uniform => dist of C is uniform on L
+|c - l| is short
+
+Making |c| uniform and |c - l| short are contradictory requirements
+
+Instead start from lattice point and add Guassian noise to it
+Large enough noise so that the distribution is uniform
+
+Pick random noise vector with Gaussian distribution and reduce it modulo
+basis of the lattice.
+
+Vector distributed almost uniformly at random over the fundamental parallelpiped.
+Induce a uniform distribution over the parallelepiped.
+
+Noise vector must be at least as large as smoothing param.
+
+
+Lattice problems are NP-hard to approximate within small factors
+construct one-way function on the assumption that P ne NP
+lattice problem are hard for small factors
+Large factors imply one-way function
+
+We want an oracle for a one-way function to solve lattice problems
+for small factors.
+
+
