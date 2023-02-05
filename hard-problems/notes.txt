@@ -1,0 +1,27 @@
+Short Vector Problem (SVP)
+
+Gap Short Vector Problem (GapSVP)
+
+Closest Vector Problem (CVP)
+
+Gap Closest Vector Problem (GapCVP)
+
+Shortest Independent Vectors Problem (SIVP)
+
+Bounded Distance Decoding (BDD)
+
+Covering Radius Problem
+
+Shortest Basis Problem
+
+
+Appendix:
+N is dim
+
+L [ R x R x ... x R ]
+
+
+
+v is vector
+
+Dist(v)

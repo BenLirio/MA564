@@ -1,0 +1,45 @@
+SIS is at least as hard as approx lattice problems
+
+SIS solver => approx Lattice solution
+
+[ SVP SIVP Covering_Radius Guarenteed_Distance_Decoding ]
+
+approx factor n log^O(1) n
+
+No longer known to be in NP coNP
+
+Tools: Gaussian & Fourier transform
+
+Smoothing Param
+
+Dist of noise given final value remains same
+(Is this uniform?)
+
+Worst case lattice => average-case one-way functions
+
+f of [ M x N ] of Z_q
+x of [ M ] of { 0 1 }
+f x = [ M ] [ M x N ] of Z_q
+
+B is the set of all n-linearly independent vectors in L [ N x N ]
+SIVP finds a b in B such that |b| le |b'| for all other b' in B
+
+approx-SIVP finds |b| such that 
+  |b|  le  poly n |b'| 
+for all other b' in B
+
+approx-SIVP is similar to SVP
+
+
+SIS is a one-way function if any of the following holds
+- SIVP in O(n^2.5)
+- SVP O(n^3)
+- Covering Radius O(n^2.5)
+- find lattice point within O(n^2.5) times covering radius of target
+New constants
+- SIVP O(n)
+- SVP O(n)
+- Covering radius O(n)
+- BDD O(n)
+
+O(n) for all lattice problems
